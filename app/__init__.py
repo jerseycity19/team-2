@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+import sqlite3
 import os
 
 app = Flask(__name__)
+
 
 #creates String of 26 random characters
 app.secret_key = os.urandom(26)
@@ -15,9 +17,10 @@ def root():
         return render_template("index.html")
     return render_template("notloggedin.html")
 
-@app.route("/authenticate", methods=["GET", "POST"])
+@app.route("/authenticate", methods=["POST"])
 def auth():
-    print(len(request.form))
+    print("here")
+    print(request.form)
     if in_session():
         return render_template("index.html")
     if len(request.form) < 2:
